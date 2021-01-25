@@ -110,12 +110,19 @@ VALUES
     ('Anna', 'Ochman', 4, 4),
     ('Iwona', 'Trzaskowska', 5, 5);
 
--- 13. Oblicza sumę wypłat dla wszystkich pracowników w firmie
+-- 13. Pobiera pełne informacje o pracowniku (imię, nazwisko, adres, stanowisko)
+SELECT pr.imie, pr.nazwisko, CONCAT(ad.ulica_numer_lokalu, ', ', kod_pocztowy, ' ', miejscowosc) AS 'adres', st.nazwa
+	FROM pracownik pr
+    JOIN stanowisko st ON pr.stanowisko_id = st.stanowisko_id
+    JOIN adres ad ON pr.adres_id = ad.adres_id;
+	
+
+-- 14. Oblicza sumę wypłat dla wszystkich pracowników w firmie
 SELECT SUM(st.wyplata) as 'Suma wypłat w firmie'
 FROM pracownik pr
 JOIN stanowisko st ON pr.stanowisko_id = st.stanowisko_id;
 
--- 14. Pobiera pracowników mieszkających w lokalizacji z kodem pocztowym 90210 (albo innym, który będzie miał 
+-- 15. Pobiera pracowników mieszkających w lokalizacji z kodem pocztowym 90210 (albo innym, który będzie miał 
 --     sens dla Twoich danych testowych)
 SELECT imie, nazwisko, kod_pocztowy, miejscowosc, ulica_numer_lokalu
 FROM pracownik pr
